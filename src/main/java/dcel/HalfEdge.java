@@ -5,11 +5,13 @@ import java.util.Iterator;
 public class HalfEdge<T extends Comparable>
         implements Comparable<HalfEdge<T>>, Iterable<HalfEdge<T>> {
 
-    PlanarVertex<T> u;
-    PlanarVertex<T> v;
+    private PlanarVertex<T> u;
+    private PlanarVertex<T> v;
 
     private HalfEdge<T> next;
     private HalfEdge<T> prev;
+
+    private boolean marked;
 
     // constructs half edge going from u --> v.
     public HalfEdge(PlanarVertex<T> u, PlanarVertex<T> v) {
@@ -17,6 +19,7 @@ public class HalfEdge<T extends Comparable>
         this.v = v;
         this.next = null;
         this.prev = null;
+        this.marked = false;
     }
 
     public HalfEdge(PlanarVertex<T> u, PlanarVertex<T> v,
@@ -27,6 +30,17 @@ public class HalfEdge<T extends Comparable>
         this.v = v;
         this.next = next;
         this.prev = prev;
+        this.marked = false;
+    }
+
+    // for faces construction.
+    protected void mark() {
+        this.marked = true;
+    }
+
+    // for faces construction.
+    protected boolean marked() {
+        return this.marked;
     }
 
     // returns source vertex.

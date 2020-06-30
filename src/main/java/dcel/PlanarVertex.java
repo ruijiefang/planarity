@@ -21,6 +21,16 @@ public class PlanarVertex<T extends Comparable> implements Comparable<PlanarVert
         ptail.changeNext(this.tail);
     }
 
+    // retrieves the head.
+    public HalfEdge<T> getHead() {
+        return this.head;
+    }
+
+    // retrieves the tail.
+    public HalfEdge<T> getTail() {
+        return this.tail;
+    }
+
     // adds bidirectional edge to list.
     public void addEdge(PlanarVertex<T> dst)  {
         addHalfEdge(dst);
