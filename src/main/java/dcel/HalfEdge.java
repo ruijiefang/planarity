@@ -43,6 +43,9 @@ public class HalfEdge<T extends Comparable>
         return this.marked;
     }
 
+    // unmark
+    public boolean unmark() { this.marked = false; }
+
     // returns source vertex.
     public PlanarVertex<T> getSrcVertex() {
         return this.u;

@@ -9,7 +9,6 @@ public class PlanarGraph<T extends Comparable> {
 
     private LinkedList<HalfEdge<T>> E;
     private HashMap<T, PlanarVertex<T>> V; // membership queries in log(n) at log(n) overhead
-    private LinkedList<Face<T>> faces; // cache the faces.
 
     // constructs an empty graph.
     public PlanarGraph() {
@@ -47,7 +46,6 @@ public class PlanarGraph<T extends Comparable> {
     }
 
     public Iterable<Face<T>> computePlanarDual() {
-        if (this.faces != null) return this.faces;
         LinkedList<Face<T>> faces = new LinkedList<Face<T>>();
         for(HalfEdge<T> e : E()) {
             try {
@@ -55,6 +53,8 @@ public class PlanarGraph<T extends Comparable> {
                 faces.add(f);
             } catch (IllegalArgumentException ignored) {}
         }
-        return  this.faces = faces;
+        for(HalfEdge<T> e : E())
+            e.unmark();
+        return faces;
     }
 }
